@@ -39,16 +39,29 @@ const StyledProjectModal = styled.article`
   top: 0;
   transform: translateY(100%);
 
+  & > header {
+    display: flex;
+    justify-content: space-between;
+
+    & > nav {
+      & a {
+        width: 35px;
+        margin-left: 10px;
+
+        & path {
+          fill: ${({ theme }) => theme.fair};
+        }
+      }
+    }
+  }
+
   & > * {
     margin: 20px 0px;
   }
 
-  & > h2 {
-    text-align: center;
-  }
-
   & > p {
     text-align: justify;
+    z-index: 2;
   }
 
   & > svg {
@@ -74,19 +87,6 @@ const StyledProjectModal = styled.article`
 
   & > #squared-image-2 {
     display: none;
-  }
-
-  & > span {
-    margin-left: auto;
-
-    & a {
-      width: 35px;
-      margin-left: 10px;
-
-      & path {
-        fill: ${({ theme }) => theme.fair};
-      }
-    }
   }
 
   animation: appear 600ms ease-in-out forwards;
@@ -171,7 +171,17 @@ const ProjectModal = ({ isProjectOpen, closeProject, project }) => {
       <StyledProjectModal ref={modalRef}>
         <Xclose onClick={() => closeProject(!isProjectOpen)} />
         <img id='web-image' src={bg} alt='bg' />
-        <Heading>{project.name}</Heading>
+        <header>
+          <Heading>{project.name}</Heading>
+          <nav>
+            <a href='#'>
+              <WebIcon />
+            </a>
+            <a href='#'>
+              <GithubIcon />
+            </a>
+          </nav>
+        </header>
         <p>
           In sunt doloremque et et quis. Aut sint iure eius fugiat dolorum
           incidunt aliquam pariatur aliquam. Est harum est et. In sunt
@@ -180,14 +190,6 @@ const ProjectModal = ({ isProjectOpen, closeProject, project }) => {
           quis. Aut sint iure eius fugiat dolorum incidunt aliquam pariatur
           aliquam. Est harum est et.
         </p>
-        <span>
-          <a href='#'>
-            <WebIcon />
-          </a>
-          <a href='#'>
-            <GithubIcon />
-          </a>
-        </span>
         <img src={squared} id='squared-image' alt='squaredImage' />
         <img src={squared} id='squared-image-2' alt='squaredImage2' />
       </StyledProjectModal>

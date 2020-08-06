@@ -17,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
         min-height: 100vh;
     }
 
+    body {
+        overflow: hidden;
+    }
+
     img {
         position: absolute;
     }

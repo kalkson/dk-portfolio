@@ -95,7 +95,7 @@ const StyledMyProjects = styled.section`
   }
 
   @media (min-width: 1200px) {
-    padding: 50px 120px;
+    padding: 120px 120px;
   }
 
   @media (min-width: 800px) {
@@ -105,7 +105,7 @@ const StyledMyProjects = styled.section`
   }
 
   @media (min-width: 1500px) {
-    padding: 50px 190px;
+    padding: 150px 190px;
   }
 `;
 
