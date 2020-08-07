@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { useLanguage } from 'context/LanguageContext';
 
 const StyledNavbar = styled.nav`
   width: 100%;
@@ -41,16 +42,21 @@ const StyledNavbar = styled.nav`
 `;
 
 const Navbar = () => {
+  const [{ language }] = useLanguage();
+
   return (
     <StyledNavbar>
       <NavLink exact activeClassName='navbar-button-active' to='/'>
-        Home
+        {language === 'english' ? 'Home' : 'Home'}
       </NavLink>
-      <NavLink activeClassName='navbar-button-active' to='/asd'>
-        About
+      <NavLink exact activeClassName='navbar-button-active' to='/projects'>
+        {language === 'english' ? 'Projects' : 'Projekty'}
       </NavLink>
-      <NavLink activeClassName='navbar-button-active' to='/qwe'>
-        Contact
+      <NavLink activeClassName='navbar-button-active' to='/about'>
+        {language === 'english' ? 'About' : 'O mnie'}
+      </NavLink>
+      <NavLink activeClassName='navbar-button-active' to='/contact'>
+        {language === 'english' ? 'Contact' : 'Kontakt'}
       </NavLink>
     </StyledNavbar>
   );

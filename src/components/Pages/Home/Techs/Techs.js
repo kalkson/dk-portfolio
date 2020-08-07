@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { useLanguage } from 'context/LanguageContext';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import js from 'assets/images/js.svg';
@@ -51,6 +52,7 @@ const StyledTechs = styled.div`
 const Techs = () => {
   const wrapper = useRef(null);
   const heading = useRef(null);
+  const [{ language }] = useLanguage();
 
   useEffect(() => {
     const elements = Array.from(wrapper.current.children);
@@ -102,22 +104,38 @@ const Techs = () => {
         <TechCard
           name='React.js'
           svg={react}
-          desc='Na co dzień korzystam z biblioteki React.js i wszelkich narzędzi z nim związanych. Dowiedz się o nich więcej w sekcji o mnie.'
+          desc={
+            language === 'polish'
+              ? 'Na co dzień korzystam z biblioteki React.js i wszelkich narzędzi z nim związanych. Dowiedz się o nich więcej w sekcji o mnie.'
+              : 'I use the React.js library and all related tools on a daily basis. Find out more about them in the about me section. '
+          }
         />
         <TechCard
           name='JS ES6+'
           svg={js}
-          desc='Język JavaScript pozwala na praktycznie wszystko. Oparta jest na nim masa bilbliotek i frameworków jak React. Od czasów ES6 jest to wspaniałe narzędzie do webdevelopmentu.'
+          desc={
+            language === 'polish'
+              ? 'Język JavaScript pozwala na praktycznie wszystko. Oparta jest na nim masa bilbliotek i frameworków jak React. Od czasów ES6 jest to wspaniałe narzędzie do webdevelopmentu.'
+              : 'JavaScript can do just about anything. It is based on a lot of libraries and frameworks like React. It has been a great web development tool since ES6. '
+          }
         />
         <TechCard
           name='CSS3 + SaSS'
           svg={css}
-          desc='Dzięki Styled Components oraz preprocessora CSS Sass opracowuję piękne i estetyczne strony a jego integracja z Reactem pozwala na niewyobrażalne jak dotąd rozwiązania.'
+          desc={
+            language === 'polish'
+              ? 'Dzięki Styled Components oraz preprocessora CSS Sass opracowuję piękne i estetyczne strony a jego integracja z Reactem pozwala na niewyobrażalne jak dotąd rozwiązania.'
+              : 'Thanks to Styled Components and the CSS Sass preprocessor, I develop beautiful and aesthetic pages, and its integration with React allows for solutions that have been unimaginable so far.'
+          }
         />
         <TechCard
           name='Firebase'
           svg={firebase}
-          desc='Swoje projekty (jeśli tego wymagają) opieram na Firebase od Google, korzystając z Cloud Functions w oparciu o node.js'
+          desc={
+            language === 'polish'
+              ? 'Swoje projekty (jeśli tego wymagają) opieram na Firebase od Google, korzystając z Cloud Functions w oparciu o node.js'
+              : 'I base my projects (if required) on Firebase from Google, using Cloud Functions based on node.js'
+          }
         />
       </StyledTechs>
     </StyledContainer>

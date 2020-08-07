@@ -19,10 +19,6 @@ const StyledProjectModalContainer = styled.div`
   top: 0;
   display: ${({ isProjectOpen }) => (isProjectOpen ? 'flex' : 'none')};
   z-index: 12;
-
-  @media (min-width: 800px) {
-    backdrop-filter: blur(10px);
-  }
 `;
 
 const StyledProjectModal = styled.article`
@@ -37,7 +33,7 @@ const StyledProjectModal = styled.article`
   z-index: 10;
   left: 0;
   top: 0;
-  transform: translateY(100%);
+  transform: translateY(-100%);
 
   & > header {
     display: flex;
@@ -93,7 +89,7 @@ const StyledProjectModal = styled.article`
 
   @keyframes appear {
     0% {
-      transform: translateY(100%);
+      transform: translateY(-100%);
     }
     100% {
       transform: translateY(0);

@@ -361,7 +361,7 @@ const AboutSection = () => {
           ease: 'easeInOut',
           scrollTrigger: {
             trigger: element,
-            start: element.id === 'me-image' ? 'top 60%' : 'top 100%',
+            start: 'top 100%',
           },
         }
       );

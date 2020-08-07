@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useLanguage } from 'context/LanguageContext';
 import HeaderLogo from 'components/General/HeaderLogo';
+import { ReactComponent as PolishFlag } from 'assets/images/pl-flag.svg';
+import { ReactComponent as UsFlag } from 'assets/images/us-flag.svg';
 import dotted from 'assets/images/dotted-square.svg';
 import logo from 'assets/images/logo.svg';
 import circles from 'assets/images/circles.svg';
@@ -26,6 +29,22 @@ const StyledHeader = styled.header`
     top: 12px;
     left: 5px;
     transform: scale(1);
+  }
+
+  & > .language-buttons {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 5;
+
+    & > button {
+      color: ${({ theme }) => theme.fair};
+      cursor: pointer;
+
+      & > svg {
+        filter: opacity(0.7);
+      }
+    }
   }
 
   & #header-social-links {
@@ -115,6 +134,7 @@ const StyledHeader = styled.header`
 
 const Header = () => {
   const [isOpen, changeOpen] = useState(false);
+  const [{ language }, dispatch] = useLanguage();
 
   const changeOpenState = () => {
     changeOpen(!isOpen);
@@ -125,6 +145,17 @@ const Header = () => {
       <button onClick={changeOpenState} id='phone-menu-button' type='button'>
         <img src={phonemenu} alt='phone-menu' />
       </button>
+      <div className='language-buttons'>
+        {language === 'polish' ? (
+          <button type='button' onClick={() => dispatch({ type: 'english' })}>
+            <UsFlag />
+          </button>
+        ) : (
+          <button type='button' onClick={() => dispatch({ type: 'polish' })}>
+            <PolishFlag />
+          </button>
+        )}
+      </div>
       <div id='header-social-links'>
         <SocialLinks />
       </div>

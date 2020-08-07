@@ -57,11 +57,11 @@ const GlobalStyle = createGlobalStyle`
 
     .active {
         display: block;
-        animation-name: appear;
+        animation-name: appears;
         animation-duration: 500ms;
         animation-fill-mode: forwards;
 
-        @keyframes appear {
+        @keyframes appears {
             0% {
                 opacity: 1;
                 transform: translateX(-1600px);

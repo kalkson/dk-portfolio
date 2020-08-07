@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import { useLanguage } from 'context/LanguageContext';
 import SocialLinks from 'components/General/SocialLinks';
 import { Link } from 'react-router-dom';
 import circles from 'assets/images/circles.svg';
@@ -41,6 +42,10 @@ const StyledPhoneMenu = styled.div`
     left: 10px;
     transform: scale(0.7);
   }
+
+  @media (min-width: 800px) {
+    display: none;
+  }
 `;
 
 const StyledMenuContainer = styled.div`
@@ -60,18 +65,23 @@ const StyledMenuContainer = styled.div`
 `;
 
 const PhoneMenu = ({ isOpen, closeModal }) => {
+  const [{ language }] = useLanguage();
+
   return (
     <StyledPhoneMenu isOpen={isOpen}>
       <Xclose onClick={closeModal} />
       <StyledMenuContainer>
-        <Link to='/' onClick={closeModal}>
-          Home
+        <Link exact activeClassName='navbar-button-active' to='/'>
+          {language === 'english' ? 'Home' : 'Home'}
         </Link>
-        <Link to='/asd' onClick={closeModal}>
-          About Me
+        <Link exact activeClassName='navbar-button-active' to='/projects'>
+          {language === 'english' ? 'Projects' : 'Projekty'}
         </Link>
-        <Link to='/qwe' onClick={closeModal}>
-          Contact
+        <Link activeClassName='navbar-button-active' to='/about'>
+          {language === 'english' ? 'About' : 'O mnie'}
+        </Link>
+        <Link activeClassName='navbar-button-active' to='/contact'>
+          {language === 'english' ? 'Contact' : 'Kontakt'}
         </Link>
       </StyledMenuContainer>
       <SocialLinks links color='#EBEBEB' />
