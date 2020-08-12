@@ -9,7 +9,6 @@ import logo from 'assets/images/logo.svg';
 import circles from 'assets/images/circles.svg';
 import hash from 'assets/images/hash.svg';
 import oval from 'assets/images/oval.svg';
-import phonemenu from 'assets/images/phone-menu.svg';
 import PhoneMenu from 'components/PhoneMenu/PhoneMenu';
 import Navbar from './Navbar';
 import SocialLinks from './SocialLinks';
@@ -25,10 +24,6 @@ const StyledHeader = styled.header`
   align-items: center;
 
   & > #phone-menu-button {
-    position: absolute;
-    top: 12px;
-    left: 5px;
-    transform: scale(1);
   }
 
   & > .language-buttons {
@@ -67,6 +62,7 @@ const StyledHeader = styled.header`
     transform: rotate(45deg);
     left: calc(50% - 32px);
     bottom: -15px;
+    z-index: 1;
   }
 
   & #dk-header-logo {
@@ -132,6 +128,47 @@ const StyledHeader = styled.header`
   }
 `;
 
+const PhoneMenuButton = styled.div`
+  position: fixed;
+  top: 18px;
+  left: 10px;
+  z-index: 10;
+  height: 2.5px;
+  width: 25px;
+  background-color: ${({ isOpen, theme }) =>
+    isOpen ? 'transparent' : theme.darkk};
+  transition: background-color 0.25s ease-in-out;
+  transform: scale(1.3);
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    height: 2.5px;
+    width: 25px;
+    background-color: ${({ theme }) => theme.darkk};
+    opacity: 1;
+    transition: transform 0.25s ease-in-out, width 0.25s ease-in-out;
+    transform-origin: left;
+  }
+
+  &:before {
+    bottom: 7px;
+    transform: ${({ isOpen }) =>
+      isOpen ? 'rotate(45deg) translateY(-2.5px)' : 'rotate(0) translateY(0)'};
+    /* width: ${({ isOpen }) => (isOpen ? '20px' : '25px')}; */
+    opacity: ${({ isVisible }) => (isVisible ? '1' : '1')};
+  }
+
+  &:after {
+    top: 7px;
+    transform: ${({ isOpen }) =>
+      isOpen ? 'rotate(-45deg) translateY(2.5px)' : 'rotate(0) translateY(0)'};
+    /* width: ${({ isOpen }) => (isOpen ? '20px' : '25px')}; */
+    opacity: ${({ isVisible }) => (isVisible ? '1' : '1')};
+  }
+`;
+
 const Header = () => {
   const [isOpen, changeOpen] = useState(false);
   const [{ language }, dispatch] = useLanguage();
@@ -142,9 +179,12 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <button onClick={changeOpenState} id='phone-menu-button' type='button'>
-        <img src={phonemenu} alt='phone-menu' />
-      </button>
+      <PhoneMenuButton
+        onClick={changeOpenState}
+        id='phone-menu-button'
+        role='button'
+        isOpen={isOpen}
+      />
       <div className='language-buttons'>
         {language === 'polish' ? (
           <button type='button' onClick={() => dispatch({ type: 'english' })}>

@@ -7,6 +7,8 @@ import Header from 'components/General/Header';
 import Footer from 'components/General/Footer';
 import Home from 'components/Pages/Home/Home';
 import Projects from 'components/Pages/Projects/Projects';
+import About from 'components/Pages/About/About';
+import Contact from 'components/Pages/Contact/Contact';
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/projects' component={Projects} />
-            <Route path='/qwe' component={() => <div>asd</div>} />
+            <Route path='/about' component={About} />
+            <Route path='/contact' component={Contact} />
           </Switch>
           <Footer />
         </BrowserRouter>

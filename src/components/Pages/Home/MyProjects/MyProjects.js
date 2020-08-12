@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
+import UrlLink from 'components/General/UrlLink';
+import { useLanguage } from 'context/LanguageContext';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Heading from 'components/General/Heading';
@@ -40,17 +42,24 @@ const projects = [
 ];
 
 const StyledMyProjects = styled.section`
-  padding: 35px 20px;
+  padding: 35px 0px;
   text-align: center;
   background-color: ${({ theme }) => theme.dark};
   overflow: hidden;
   position: relative;
   color: ${({ theme }) => theme.fair};
 
+  & button {
+    padding: 0;
+  }
+
+  & > div {
+    margin-top: 30px;
+  }
+
   & > span {
     opacity: 0.5;
     font-size: 1.3rem;
-
     animation: blink 3000ms ease-in-out infinite;
   }
 
@@ -117,6 +126,8 @@ const MyProjects = () => {
     width: window.innerWidth,
   });
 
+  const [{ language }] = useLanguage();
+
   const settings = {
     infinite: true,
     speed: 500,
@@ -137,7 +148,9 @@ const MyProjects = () => {
   return (
     <>
       <StyledMyProjects>
-        <Heading color='#EBEBEB'>Moje projekty</Heading>
+        <Heading color='#EBEBEB'>
+          {language === 'polish' ? 'Moje projekty' : 'My projects'}
+        </Heading>
         <Slider {...settings}>
           {projects &&
             projects.map((project) => (
@@ -158,6 +171,13 @@ const MyProjects = () => {
             ))}
         </Slider>
         <span>- swipe -</span>
+        <div>
+          <UrlLink to='/projects'>
+            {language === 'polish'
+              ? 'Zobacz wszystkie projeckty'
+              : 'See all projects'}
+          </UrlLink>
+        </div>
       </StyledMyProjects>
       <ProjectModal
         isProjectOpen={isProjectOpen}

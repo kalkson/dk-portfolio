@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 import bg from 'assets/images/bg1.png';
 import squared from 'assets/images/squared-square.svg';
 import { ReactComponent as Xclose } from 'assets/images/xclose.svg';
@@ -34,6 +35,7 @@ const StyledProjectModal = styled.article`
   left: 0;
   top: 0;
   transform: translateY(-100%);
+  box-shadow: 0px 0px 75px 12px rgba(0, 0, 0, 0.75);
 
   & > header {
     display: flex;
@@ -158,10 +160,6 @@ const ProjectModal = ({ isProjectOpen, closeProject, project }) => {
     };
   });
 
-  //   useEffect(() => {
-  //     TweenMax.from(ProjectRef.current, 1, { y: '-100%' });
-  //   });
-
   return (
     <StyledProjectModalContainer isProjectOpen={isProjectOpen}>
       <StyledProjectModal ref={modalRef}>
@@ -170,10 +168,10 @@ const ProjectModal = ({ isProjectOpen, closeProject, project }) => {
         <header>
           <Heading>{project.name}</Heading>
           <nav>
-            <a href='#'>
+            <a href='/asd'>
               <WebIcon />
             </a>
-            <a href='#'>
+            <a href='/github'>
               <GithubIcon />
             </a>
           </nav>
@@ -191,6 +189,12 @@ const ProjectModal = ({ isProjectOpen, closeProject, project }) => {
       </StyledProjectModal>
     </StyledProjectModalContainer>
   );
+};
+
+ProjectModal.propTypes = {
+  isProjectOpen: propTypes.bool.isRequired,
+  closeProject: propTypes.func.isRequired,
+  project: propTypes.objectOf(propTypes.string).isRequired,
 };
 
 export default ProjectModal;

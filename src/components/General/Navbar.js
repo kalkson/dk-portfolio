@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { useLanguage } from 'context/LanguageContext';
@@ -49,7 +49,7 @@ const Navbar = () => {
       <NavLink exact activeClassName='navbar-button-active' to='/'>
         {language === 'english' ? 'Home' : 'Home'}
       </NavLink>
-      <NavLink exact activeClassName='navbar-button-active' to='/projects'>
+      <NavLink activeClassName='navbar-button-active' to='/projects'>
         {language === 'english' ? 'Projects' : 'Projekty'}
       </NavLink>
       <NavLink activeClassName='navbar-button-active' to='/about'>

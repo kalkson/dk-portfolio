@@ -12,7 +12,7 @@ const StyledSocialLinks = styled.div`
   z-index: 3;
 
   & > span {
-    color: ${({ theme }) => theme.fair};
+    color: ${({ color }) => color};
     font-size: 1.8rem;
     display: flex;
     align-items: center;

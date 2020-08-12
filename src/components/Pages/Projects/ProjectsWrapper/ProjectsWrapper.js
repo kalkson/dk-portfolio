@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import bg from 'assets/images/bg1.png';
 import ProjectTab from 'components/Pages/Home/MyProjects/ProjectTab';
 import ProjectModal from 'components/Pages/Home/MyProjects/ProjectModal';
@@ -79,6 +78,7 @@ const StyledProjectsWrapper = styled.article`
 
   @media (max-width: 800px) {
     margin: 0;
+    padding: 20px 0px;
   }
 
   & > button {
@@ -115,15 +115,12 @@ const ProjectsWrapper = () => {
     width: window.innerWidth,
   });
 
-  const animation = { isActive: false };
   const wrapper = useRef(null);
 
   useEffect(() => {
     function handleResize() {
       setDimensions({ height: window.innerHeight, width: window.innerWidth });
     }
-
-    console.log('asd');
 
     const elements = Array.from(wrapper.current.children);
 
@@ -137,7 +134,6 @@ const ProjectsWrapper = () => {
           onStart: () => {
             setAnimationActive(true);
           },
-          onComplete: () => {},
         });
       });
     } else if (isAnimationActive === false && window.screen.width < 800) {

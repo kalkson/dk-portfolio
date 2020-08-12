@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ReactComponent as Rectangle1 } from 'assets/images/rec-1.svg';
@@ -9,8 +8,8 @@ import SocialLinks from 'components/General/SocialLinks';
 import Heading from 'components/General/Heading';
 import QuestionMark from 'assets/images/questionmark.svg';
 import MeImage from 'assets/images/damian.png';
-import Arrow from 'assets/images/arrow-link.svg';
 import Dotted from 'assets/images/dotted-square.svg';
+import UrlLink from 'components/General/UrlLink';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,8 +20,6 @@ const StyledAboutSection = styled.section`
   background-color: ${({ theme }) => theme.dark};
   color: ${({ theme }) => theme.fair};
   position: relative;
-  /* overflow: hidden; */
-  /* height: 800px; */
 
   &:after {
     content: '';
@@ -78,27 +75,6 @@ const StyledAboutSection = styled.section`
     margin-top: 30px;
   }
 
-  & > #redirects {
-    margin: 50px 0px 0px;
-    font-size: 1.5rem;
-
-    & > a {
-      color: ${({ theme }) => theme.purple};
-      vertical-align: middle;
-      transition: all 100ms ease-in;
-
-      &:hover {
-        transform: translateY(-5px);
-        text-decoration: underline;
-      }
-    }
-
-    & img {
-      height: 20px;
-      position: relative;
-    }
-  }
-
   @media (max-width: 1000px) {
     & .animated-rectangles {
       display: none;
@@ -111,7 +87,6 @@ const StyledAboutSection = styled.section`
     right: 40%;
     top: 0;
     z-index: 3;
-
   }
 
   & .animated-rectangle-1 {
@@ -141,7 +116,6 @@ const StyledAboutSection = styled.section`
     100% {
       transform: translate(500px, -150px) rotate(-20deg) scale(0.5);
     }
-  }
   }
 
   @keyframes reconeflow {
@@ -269,10 +243,10 @@ const StyledAboutSection = styled.section`
 
     & > #redirects {
       display: flex;
-      width: 400px;
+      width: 270px;
       justify-content: space-between;
       font-size: 2rem;
-      margin-left: 210px;
+      margin-left: 250px;
     }
   }
 
@@ -349,7 +323,6 @@ const AboutSection = () => {
     const elements = Array.from(wrapper.current.children);
 
     elements.forEach((element) => {
-      console.log(element);
       gsap.fromTo(
         element,
         { y: element.id === 'me-image' ? '-=100' : '+=100', opacity: 0 },
@@ -393,13 +366,16 @@ const AboutSection = () => {
       </p>
       <SocialLinks links color='#EBEBEB' />
       <div id='redirects'>
-        <Link to='/asd'>
+        {/* <Link to='/asd'>
           O mnie <img src={Arrow} alt='arrowLink' />
         </Link>
         <br />
         <Link to='/contact'>
           Kontakt <img src={Arrow} alt='arrowLink' />
-        </Link>
+        </Link> */}
+        <UrlLink to='/about'>O mnie</UrlLink>
+        <br />
+        <UrlLink to='/contact'>Kontakt</UrlLink>
       </div>
       <Rectangle1 className='animated-rectangles animated-rectangle-1' />
       <Rectangle2 className='animated-rectangles animated-rectangle-2' />

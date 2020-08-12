@@ -6,7 +6,7 @@ import SocialLinks from 'components/General/SocialLinks';
 import { Link } from 'react-router-dom';
 import circles from 'assets/images/circles.svg';
 import oval from 'assets/images/oval.svg';
-import { ReactComponent as Xclose } from 'assets/images/xclose.svg';
+// import { ReactComponent as Xclose } from 'assets/images/xclose.svg';
 
 const StyledPhoneMenu = styled.div`
   display: flex;
@@ -69,18 +69,35 @@ const PhoneMenu = ({ isOpen, closeModal }) => {
 
   return (
     <StyledPhoneMenu isOpen={isOpen}>
-      <Xclose onClick={closeModal} />
+      {/* <Xclose onClick={closeModal} /> */}
       <StyledMenuContainer>
-        <Link exact activeClassName='navbar-button-active' to='/'>
+        <Link
+          exact
+          activeClassName='navbar-button-active'
+          to='/'
+          onClick={() => closeModal(true)}
+        >
           {language === 'english' ? 'Home' : 'Home'}
         </Link>
-        <Link exact activeClassName='navbar-button-active' to='/projects'>
+        <Link
+          activeClassName='navbar-button-active'
+          to='/projects'
+          onClick={() => closeModal(true)}
+        >
           {language === 'english' ? 'Projects' : 'Projekty'}
         </Link>
-        <Link activeClassName='navbar-button-active' to='/about'>
+        <Link
+          activeClassName='navbar-button-active'
+          to='/about'
+          onClick={() => closeModal(true)}
+        >
           {language === 'english' ? 'About' : 'O mnie'}
         </Link>
-        <Link activeClassName='navbar-button-active' to='/contact'>
+        <Link
+          activeClassName='navbar-button-active'
+          to='/contact'
+          onClick={() => closeModal(true)}
+        >
           {language === 'english' ? 'Contact' : 'Kontakt'}
         </Link>
       </StyledMenuContainer>
