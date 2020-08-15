@@ -4,9 +4,9 @@ import { useLanguage } from 'context/LanguageContext';
 import Heading from 'components/General/Heading';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Laptop from 'assets/images/laptop.svg';
 import TechListItem from './TechListItem';
 import listData from './listData';
-import Laptop from 'assets/images/laptop.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,7 +78,7 @@ const TechList = () => {
             ease: 'easeInOut',
             scrollTrigger: {
               trigger: item,
-              start: 'top 60%',
+              start: 'top 80%',
             },
           }
         );
@@ -102,9 +102,9 @@ const TechList = () => {
         {listData &&
           listData.map((item) => {
             return (
-              <>
-                <TechListItem items={item.items}>{item.title}</TechListItem>
-              </>
+              <TechListItem key={item.title} items={item.items}>
+                {item.title}
+              </TechListItem>
             );
           })}
       </StyledList>

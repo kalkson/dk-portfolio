@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');
 
     *, *:before, *:after {
         box-sizing: border-box;
@@ -86,19 +85,6 @@ const GlobalStyle = createGlobalStyle`
      .slick-prev, .slick-next {
         transform: scale(2);
     }
-
-    /*
-    .slick-prev {
-        background: url('./../assets/images/bg1.png') no-repeat center center !important;
-        width: 16px;
-        height: 24px;
-        background-color: red;
-    }
-
-    .slick-next::before {
-
-    } */
-
 `;
 
 export default GlobalStyle;

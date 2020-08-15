@@ -1,10 +1,10 @@
 import React, { createContext } from 'react';
+import propTypes from 'prop-types';
 
 const LanguageContext = createContext();
 const LanguageDispatchContext = createContext();
 
 const languageReducer = (state, action) => {
-  console.log(action.type);
   switch (action.type) {
     case 'english': {
       return { language: 'english' };
@@ -54,3 +54,10 @@ const useLanguage = () => {
 };
 
 export { LanguageProvider, useLanguageState, useLanguageDispatch, useLanguage };
+
+LanguageProvider.propTypes = {
+  children: propTypes.oneOfType([
+    propTypes.arrayOf(propTypes.node),
+    propTypes.node,
+  ]).isRequired,
+};

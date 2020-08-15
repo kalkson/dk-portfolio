@@ -77,7 +77,7 @@ const TechCard = ({ name, svg, desc }) => {
 };
 
 TechCard.propTypes = {
-  name: propTypes.isRequired,
+  name: propTypes.string.isRequired,
   svg: propTypes.string.isRequired,
   desc: propTypes.string,
 };

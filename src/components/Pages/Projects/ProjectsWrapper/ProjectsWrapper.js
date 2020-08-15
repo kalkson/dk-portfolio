@@ -1,72 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import bg from 'assets/images/bg1.png';
+import propTypes from 'prop-types';
 import ProjectTab from 'components/Pages/Home/MyProjects/ProjectTab';
 import ProjectModal from 'components/Pages/Home/MyProjects/ProjectModal';
 import ProjectListItem from 'components/Pages/Projects/ProjectsWrapper/ProjectListItem';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from 'context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const projects = [
-  {
-    name: 'idoxeadnails',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'idoxedasdnails',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'idoxedanails',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'kocham idzie',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'idoxeadnails',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'idoxedasdnails',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'idoxedanails',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'kocham idzie',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-];
 
 const StyledProjectsWrapper = styled.article`
   display: flex;
@@ -75,8 +17,10 @@ const StyledProjectsWrapper = styled.article`
   flex-wrap: wrap;
   background-color: ${({ theme }) => theme.dark};
   padding: 20px;
+  z-index: 2;
+  position: relative;
 
-  @media (max-width: 800px) {
+  @media (max-width: 1000px) {
     margin: 0;
     padding: 20px 0px;
   }
@@ -103,12 +47,18 @@ const StyledProjectsWrapper = styled.article`
     justify-content: initial;
     align-items: center;
   }
+
+  @media (max-width: 1000px) {
+    & button {
+      width: 100%;
+    }
+  }
 `;
 
-const ProjectsWrapper = () => {
+const ProjectsWrapper = ({ projects }) => {
   const [isProjectOpen, setProjectOpen] = useState(false);
-  const [currentProject, setCurrentProject] = useState(projects[0]);
-  const [isAnimationActive, setAnimationActive] = useState(false);
+  const [currentProject, setCurrentProject] = useState([]);
+  const [{ language }] = useLanguage();
 
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
@@ -122,67 +72,35 @@ const ProjectsWrapper = () => {
       setDimensions({ height: window.innerHeight, width: window.innerWidth });
     }
 
-    const elements = Array.from(wrapper.current.children);
-
-    if (window.screen.width > 800 && isAnimationActive === false) {
-      elements.forEach((element, i) => {
-        gsap.from(element, {
-          opacity: 0,
-          y: 200,
-          duration: 0.8,
-          delay: 0.1 * i,
-          onStart: () => {
-            setAnimationActive(true);
-          },
-        });
-      });
-    } else if (isAnimationActive === false && window.screen.width < 800) {
-      elements.forEach((element) => {
-        gsap.fromTo(
-          element.children,
-          { y: '+=100', opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.2,
-            duration: 1,
-            ease: 'easeInOut',
-            onStart: () => {
-              setAnimationActive(true);
-            },
-            onComplete: () => {},
-            scrollTrigger: {
-              trigger: element,
-              start: 'top 60%',
-            },
-          }
-        );
-      });
-    }
-
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  });
+  }, []);
 
-  if (dimensions.width > 800) {
+  if (dimensions.width > 1000) {
     return (
       <>
         <StyledProjectsWrapper ref={wrapper}>
           {projects &&
             projects.map((project) => (
               <button
+                key={`${project.title}-button`}
                 type='button'
                 onClick={() => {
-                  setProjectOpen(!isProjectOpen);
+                  setCurrentProject([]);
                   setCurrentProject(project);
+                  setProjectOpen(!isProjectOpen);
                 }}
               >
                 <ProjectTab
-                  name={project.name}
-                  shortDescription={project.shortDescription}
-                  description={project.description}
-                  img={project.img}
+                  key={project.title}
+                  title={project.title}
+                  shortDescription={
+                    language === 'polish'
+                      ? project.polishShortDescription
+                      : project.englishShortDescription
+                  }
+                  imageUrl={project.imageUrl}
                 />
               </button>
             ))}
@@ -190,7 +108,15 @@ const ProjectsWrapper = () => {
         <ProjectModal
           isProjectOpen={isProjectOpen}
           closeProject={setProjectOpen}
-          project={currentProject}
+          title={currentProject.title}
+          imageUrl={currentProject.imageUrl}
+          github={currentProject.github}
+          webUrl={currentProject.webUrl}
+          description={
+            language === 'polish'
+              ? currentProject.polishDescription
+              : currentProject.englishDescription
+          }
         />
       </>
     );
@@ -202,17 +128,23 @@ const ProjectsWrapper = () => {
           {projects &&
             projects.map((project) => (
               <button
+                key={`${project.title}-button`}
                 type='button'
                 onClick={() => {
-                  setProjectOpen(!isProjectOpen);
+                  setCurrentProject([]);
                   setCurrentProject(project);
+                  setProjectOpen(!isProjectOpen);
                 }}
               >
                 <ProjectListItem
-                  name={project.name}
-                  shortDescription={project.shortDescription}
-                  description={project.description}
-                  img={project.img}
+                  key={project.title}
+                  title={project.title}
+                  shortDescription={
+                    language === 'polish'
+                      ? project.polishShortDescription
+                      : project.englishShortDescription
+                  }
+                  imageUrl={project.imageUrl}
                 />
               </button>
             ))}
@@ -221,10 +153,22 @@ const ProjectsWrapper = () => {
       <ProjectModal
         isProjectOpen={isProjectOpen}
         closeProject={setProjectOpen}
-        project={currentProject}
+        title={currentProject.title}
+        imageUrl={currentProject.imageUrl}
+        github={currentProject.github}
+        webUrl={currentProject.webUrl}
+        description={
+          language === 'polish'
+            ? currentProject.polishDescription
+            : currentProject.englishDescription
+        }
       />
     </>
   );
 };
 
 export default ProjectsWrapper;
+
+ProjectsWrapper.propTypes = {
+  projects: propTypes.arrayOf(propTypes.object).isRequired,
+};

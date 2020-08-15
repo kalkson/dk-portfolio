@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
-import bg from 'assets/images/bg1.png';
 import squared from 'assets/images/squared-square.svg';
 import { ReactComponent as Xclose } from 'assets/images/xclose.svg';
 import { ReactComponent as GithubIcon } from 'assets/images/github-icon.svg';
@@ -73,7 +72,8 @@ const StyledProjectModal = styled.article`
 
   & > #web-image {
     position: relative;
-    height: 200px;
+    width: 100%;
+    /* height: 200px; */
   }
 
   & > #squared-image {
@@ -102,10 +102,6 @@ const StyledProjectModal = styled.article`
     max-width: 400px;
     height: auto;
 
-    & > #web-image {
-      height: 80%;
-    }
-
     & > #squared-image {
       position: absolute;
       bottom: -60px;
@@ -124,24 +120,24 @@ const StyledProjectModal = styled.article`
 
   @media (min-width: 1200px) {
     max-width: 500px;
-    height: 600px;
-
-    & > #web-image {
-      height: 70%;
-    }
+    /* height: 600px; */
   }
 
   @media (min-width: 1500px) {
     max-width: 800px;
-    height: 800px;
-
-    & > #web-image {
-      height: 70%;
-    }
+    /* height: 800px; */
   }
 `;
 
-const ProjectModal = ({ isProjectOpen, closeProject, project }) => {
+const ProjectModal = ({
+  isProjectOpen,
+  closeProject,
+  title,
+  imageUrl,
+  github,
+  description,
+  webUrl,
+}) => {
   const modalRef = useRef(null);
 
   const listener = (e) => {
@@ -164,27 +160,20 @@ const ProjectModal = ({ isProjectOpen, closeProject, project }) => {
     <StyledProjectModalContainer isProjectOpen={isProjectOpen}>
       <StyledProjectModal ref={modalRef}>
         <Xclose onClick={() => closeProject(!isProjectOpen)} />
-        <img id='web-image' src={bg} alt='bg' />
+        <img id='web-image' src={imageUrl} alt='bg' />
         <header>
-          <Heading>{project.name}</Heading>
+          <Heading>{title}</Heading>
           <nav>
-            <a href='/asd'>
+            <a href={webUrl}>
               <WebIcon />
             </a>
-            <a href='/github'>
+            <a href={github}>
               <GithubIcon />
             </a>
           </nav>
         </header>
-        <p>
-          In sunt doloremque et et quis. Aut sint iure eius fugiat dolorum
-          incidunt aliquam pariatur aliquam. Est harum est et. In sunt
-          doloremque et et quis. Aut sint iure eius fugiat dolorum incidunt
-          aliquam pariatur aliquam. Est harum est et. In sunt doloremque et et
-          quis. Aut sint iure eius fugiat dolorum incidunt aliquam pariatur
-          aliquam. Est harum est et.
-        </p>
-        <img src={squared} id='squared-image' alt='squaredImage' />
+        <p>{description}</p>
+        {/* <img src={squared} id='squared-image' alt='squaredImage' /> */}
         <img src={squared} id='squared-image-2' alt='squaredImage2' />
       </StyledProjectModal>
     </StyledProjectModalContainer>
@@ -194,7 +183,19 @@ const ProjectModal = ({ isProjectOpen, closeProject, project }) => {
 ProjectModal.propTypes = {
   isProjectOpen: propTypes.bool.isRequired,
   closeProject: propTypes.func.isRequired,
-  project: propTypes.objectOf(propTypes.string).isRequired,
+  title: propTypes.string,
+  description: propTypes.string,
+  imageUrl: propTypes.string,
+  github: propTypes.string,
+  webUrl: propTypes.string,
+};
+
+ProjectModal.defaultProps = {
+  title: '',
+  description: '',
+  imageUrl: '',
+  github: '',
+  webUrl: '',
 };
 
 export default ProjectModal;

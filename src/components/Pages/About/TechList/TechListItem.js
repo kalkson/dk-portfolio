@@ -81,7 +81,9 @@ const TechListItem = ({ children, items }) => {
       <StyledTechList isVisible={isListVisible}>
         {items &&
           items.map((item) => (
-            <ListItem icon={item.icon}>{item.name}</ListItem>
+            <ListItem key={item.name} icon={item.icon}>
+              {item.name}
+            </ListItem>
           ))}
       </StyledTechList>
     </StyledTechListItem1>
@@ -89,12 +91,18 @@ const TechListItem = ({ children, items }) => {
 };
 
 ListItem.propTypes = {
-  children: propTypes.element.isRequired,
+  children: propTypes.oneOfType([
+    propTypes.arrayOf(propTypes.node),
+    propTypes.node,
+  ]).isRequired,
   icon: propTypes.string.isRequired,
 };
 
 TechListItem.propTypes = {
-  children: propTypes.element.isRequired,
+  children: propTypes.oneOfType([
+    propTypes.arrayOf(propTypes.node),
+    propTypes.node,
+  ]).isRequired,
   items: propTypes.arrayOf(propTypes.object).isRequired,
 };
 

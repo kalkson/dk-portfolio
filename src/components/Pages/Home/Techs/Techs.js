@@ -93,7 +93,7 @@ const Techs = () => {
       y: -100,
       duration: 0.8,
     });
-  });
+  }, []);
 
   return (
     <StyledContainer ref={heading}>

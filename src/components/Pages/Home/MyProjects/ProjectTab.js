@@ -1,20 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import bg from 'assets/images/bg1.png';
+import propTypes from 'prop-types';
 import Heading from 'components/General/Heading';
 import { ReactComponent as ArrowDown } from 'assets/images/arrow-down.svg';
 
 const StyledProjectTab = styled.article`
-  width: 100%;
   min-height: 300px;
   margin: 30px 0px;
   background-color: white;
   transition: all ease-in-out 200ms;
   cursor: pointer;
+  width: 340px;
 
-  & > img {
+  & > .web-tab-image {
     width: 100%;
     position: relative;
+    background: transparent url(${({ img }) => img}) center / cover no-repeat;
   }
 
   & > div {
@@ -32,9 +33,8 @@ const StyledProjectTab = styled.article`
     }
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: 1400px) {
     margin: 30px 20px;
-    width: auto;
 
     &:hover {
       transform: scale(1.1);
@@ -45,15 +45,19 @@ const StyledProjectTab = styled.article`
       }
     }
   }
+
+  @media (max-width: 800px) {
+    width: auto;
+  }
 `;
 
-const ProjectTab = ({ name }) => {
+const ProjectTab = ({ title, imageUrl, shortDescription }) => {
   return (
-    <StyledProjectTab>
-      <img src={bg} alt='bg' />
+    <StyledProjectTab img={imageUrl}>
+      <div className='web-tab-image' />
       <div>
-        <Heading small>{name}</Heading>
-        <p>Strona do wstawiania paznokci</p>
+        <Heading small>{title}</Heading>
+        <p>{shortDescription}</p>
         <ArrowDown />
       </div>
     </StyledProjectTab>
@@ -61,3 +65,13 @@ const ProjectTab = ({ name }) => {
 };
 
 export default ProjectTab;
+
+ProjectTab.propTypes = {
+  title: propTypes.string.isRequired,
+  imageUrl: propTypes.string.isRequired,
+  shortDescription: propTypes.string,
+};
+
+ProjectTab.defaultProps = {
+  shortDescription: '',
+};

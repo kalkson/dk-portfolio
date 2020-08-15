@@ -366,13 +366,6 @@ const AboutSection = () => {
       </p>
       <SocialLinks links color='#EBEBEB' />
       <div id='redirects'>
-        {/* <Link to='/asd'>
-          O mnie <img src={Arrow} alt='arrowLink' />
-        </Link>
-        <br />
-        <Link to='/contact'>
-          Kontakt <img src={Arrow} alt='arrowLink' />
-        </Link> */}
         <UrlLink to='/about'>O mnie</UrlLink>
         <br />
         <UrlLink to='/contact'>Kontakt</UrlLink>

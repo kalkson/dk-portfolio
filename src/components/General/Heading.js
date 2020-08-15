@@ -20,12 +20,16 @@ const Heading = ({ children, color, small }) => {
 export default Heading;
 
 Heading.propTypes = {
-  children: propTypes.element.isRequired,
+  children: propTypes.oneOfType([
+    propTypes.arrayOf(propTypes.node),
+    propTypes.node,
+  ]),
   color: propTypes.string,
   small: propTypes.bool,
 };
 
 Heading.defaultProps = {
+  children: null,
   color: null,
   small: null,
 };

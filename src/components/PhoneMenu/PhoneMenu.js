@@ -71,33 +71,16 @@ const PhoneMenu = ({ isOpen, closeModal }) => {
     <StyledPhoneMenu isOpen={isOpen}>
       {/* <Xclose onClick={closeModal} /> */}
       <StyledMenuContainer>
-        <Link
-          exact
-          activeClassName='navbar-button-active'
-          to='/'
-          onClick={() => closeModal(true)}
-        >
+        <Link to='/' onClick={() => closeModal(true)}>
           {language === 'english' ? 'Home' : 'Home'}
         </Link>
-        <Link
-          activeClassName='navbar-button-active'
-          to='/projects'
-          onClick={() => closeModal(true)}
-        >
+        <Link to='/projects' onClick={() => closeModal(true)}>
           {language === 'english' ? 'Projects' : 'Projekty'}
         </Link>
-        <Link
-          activeClassName='navbar-button-active'
-          to='/about'
-          onClick={() => closeModal(true)}
-        >
+        <Link to='/about' onClick={() => closeModal(true)}>
           {language === 'english' ? 'About' : 'O mnie'}
         </Link>
-        <Link
-          activeClassName='navbar-button-active'
-          to='/contact'
-          onClick={() => closeModal(true)}
-        >
+        <Link to='/contact' onClick={() => closeModal(true)}>
           {language === 'english' ? 'Contact' : 'Kontakt'}
         </Link>
       </StyledMenuContainer>

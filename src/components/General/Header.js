@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
 import { useLanguage } from 'context/LanguageContext';
 import HeaderLogo from 'components/General/HeaderLogo';
 import { ReactComponent as PolishFlag } from 'assets/images/pl-flag.svg';
@@ -12,6 +16,7 @@ import oval from 'assets/images/oval.svg';
 import PhoneMenu from 'components/PhoneMenu/PhoneMenu';
 import Navbar from './Navbar';
 import SocialLinks from './SocialLinks';
+import AuthButtons from './AuthButtons';
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -169,7 +174,7 @@ const PhoneMenuButton = styled.div`
   }
 `;
 
-const Header = () => {
+const Header = ({ auth }) => {
   const [isOpen, changeOpen] = useState(false);
   const [{ language }, dispatch] = useLanguage();
 
@@ -179,6 +184,7 @@ const Header = () => {
 
   return (
     <StyledHeader>
+      {auth.uid ? <AuthButtons /> : null}
       <PhoneMenuButton
         onClick={changeOpenState}
         id='phone-menu-button'
@@ -213,4 +219,18 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default compose(connect(mapStateToProps), firestoreConnect())(Header);
+
+Header.propTypes = {
+  auth: propTypes.object,
+};
+
+Header.defaultProps = {
+  auth: null,
+};

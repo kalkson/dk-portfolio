@@ -27,6 +27,7 @@ const StyledAboutMe = styled.section`
     justify-content: space-between;
     align-items: flex-end;
     z-index: 3;
+    position: relative;
 
     & span {
       & > a {

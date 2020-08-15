@@ -1,45 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import propTypes from 'prop-types';
 import Slider from 'react-slick';
 import UrlLink from 'components/General/UrlLink';
 import { useLanguage } from 'context/LanguageContext';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Heading from 'components/General/Heading';
-import bg from 'assets/images/bg1.png';
 import ProjectTab from './ProjectTab';
 import ProjectModal from './ProjectModal';
-
-const projects = [
-  {
-    name: 'idoxeadnails',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'idoxedasdnails',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'idoxedanails',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-  {
-    name: 'kocham idzie',
-    img: bg,
-    shordDescription: 'Strona do wstawiania paznokci',
-    description:
-      'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
-  },
-];
 
 const StyledMyProjects = styled.section`
   padding: 35px 0px;
@@ -116,11 +88,19 @@ const StyledMyProjects = styled.section`
   @media (min-width: 1500px) {
     padding: 150px 190px;
   }
+
+  & .slick-track {
+    height: fit-content;
+    & > div {
+      display: flex;
+      justify-content: center;
+    }
+  }
 `;
 
-const MyProjects = () => {
+const MyProjects = ({ projects }) => {
   const [isProjectOpen, setProjectOpen] = useState(false);
-  const [currentProject, setCurrentProject] = useState(projects[0]);
+  const [currentProject, setCurrentProject] = useState([]);
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
@@ -132,7 +112,6 @@ const MyProjects = () => {
     infinite: true,
     speed: 500,
     slidesToShow: dimensions.width > 800 ? 3 : 1,
-    slidesToScroll: dimensions.width > 800 ? 3 : 1,
   };
 
   useEffect(() => {
@@ -155,17 +134,23 @@ const MyProjects = () => {
           {projects &&
             projects.map((project) => (
               <button
+                key={`${project.name}-button`}
                 type='button'
                 onClick={() => {
-                  setProjectOpen(!isProjectOpen);
+                  setCurrentProject([]);
                   setCurrentProject(project);
+                  setProjectOpen(!isProjectOpen);
                 }}
               >
                 <ProjectTab
-                  name={project.name}
-                  shortDescription={project.shortDescription}
-                  description={project.description}
-                  img={project.img}
+                  key={project.title}
+                  title={project.title}
+                  shortDescription={
+                    language === 'polish'
+                      ? project.polishShortDescription
+                      : project.englishShortDescription
+                  }
+                  imageUrl={project.imageUrl}
                 />
               </button>
             ))}
@@ -182,10 +167,38 @@ const MyProjects = () => {
       <ProjectModal
         isProjectOpen={isProjectOpen}
         closeProject={setProjectOpen}
-        project={currentProject}
+        title={currentProject.title}
+        imageUrl={currentProject.imageUrl}
+        github={currentProject.github}
+        webUrl={currentProject.webUrl}
+        description={
+          language === 'polish'
+            ? currentProject.polishDescription
+            : currentProject.englishDescription
+        }
       />
     </>
   );
 };
 
-export default MyProjects;
+const mapStateToProps = (state) => {
+  return {
+    projects: state.firestore.ordered.projects,
+  };
+};
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: 'projects' }])
+)(MyProjects);
+
+MyProjects.propTypes = {
+  projects: propTypes.oneOfType([
+    propTypes.arrayOf(propTypes.array),
+    propTypes.objectOf(propTypes.array),
+  ]),
+};
+
+MyProjects.defaultProps = {
+  projects: [],
+};

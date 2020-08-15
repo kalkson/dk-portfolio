@@ -58,7 +58,10 @@ const UrlLink = ({ to, children, href }) => {
 
 UrlLink.propTypes = {
   to: propTypes.string,
-  children: propTypes.element.isRequired,
+  children: propTypes.oneOfType([
+    propTypes.arrayOf(propTypes.node),
+    propTypes.node,
+  ]).isRequired,
   href: propTypes.string,
 };
 

@@ -1,5 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
+import { firestoreConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Heading from 'components/General/Heading';
@@ -11,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 const StyledProjects = styled.main`
   background-color: ${({ theme }) => theme.fair};
   width: 100%;
-  padding: 100px 0 0;
+  padding: 100px 0 200px;
   position: relative;
 
   @media (min-width: 1200px) {
@@ -48,36 +52,48 @@ const StyledProjects = styled.main`
   }
 `;
 
-const Projects = () => {
+const Projects = ({ projects }) => {
   const heading = useRef(null);
-  const active = { active: false };
 
   useEffect(() => {
     const headin = heading.current.children;
 
-    if (active.active === false)
-      gsap.from(headin, {
-        opacity: 0,
-        y: -100,
-        duration: 0.8,
-        onStart: () => {
-          active.active = true;
-        },
-        onComplete: () => {
-          active.active = false;
-        },
-      });
-  });
+    gsap.from(headin, {
+      opacity: 0,
+      y: -100,
+      duration: 0.8,
+    });
+  }, []);
 
   return (
     <StyledProjects>
       <header ref={heading}>
         <Heading>Moje Projekty</Heading>
       </header>
-      <ProjectsWrapper />
+      <ProjectsWrapper projects={projects} />
       <img src={Book} alt='book' />
     </StyledProjects>
   );
 };
 
-export default Projects;
+const mapStateToProps = (state) => {
+  return {
+    projects: state.firestore.ordered.projects,
+  };
+};
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: 'projects' }])
+)(Projects);
+
+Projects.propTypes = {
+  projects: propTypes.oneOfType([
+    propTypes.arrayOf(propTypes.array),
+    propTypes.objectOf(propTypes.array),
+  ]),
+};
+
+Projects.defaultProps = {
+  projects: [],
+};
