@@ -4,6 +4,9 @@ import { useLanguage } from 'context/LanguageContext';
 import Heading from 'components/General/Heading';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ReactComponent as CheckIcon } from 'assets/images/check-icon.svg';
+import { ReactComponent as UnCheckIcon } from 'assets/images/un-check-icon.svg';
+import { ReactComponent as InProgressIcon } from 'assets/images/in-progress-icon.svg';
 import Laptop from 'assets/images/laptop.svg';
 import TechListItem from './TechListItem';
 import listData from './listData';
@@ -22,7 +25,35 @@ const StyledTechList = styled.section`
   }
 
   & > header {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
+
+    & > div {
+      display: flex;
+
+      & > span {
+        display: flex;
+        align-items: center;
+
+        & > svg {
+          margin: 0 6px;
+          width: 24px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    & > header {
+      position: relative;
+      z-index: 3;
+      & > div {
+        flex-direction: column;
+        & > span {
+          margin: 2px 0;
+        }
+      }
+    }
   }
 
   & > img {
@@ -92,6 +123,18 @@ const TechList = () => {
     <StyledTechList ref={wrapper}>
       <header>
         <Heading>{language === 'polish' ? 'Tech Lista' : 'Tech List'}</Heading>
+        <div>
+          <span>
+            <CheckIcon /> mastered{' '}
+          </span>
+          <span>
+            <InProgressIcon /> in progress{' '}
+          </span>
+          <span>
+            <UnCheckIcon />
+            in plans
+          </span>
+        </div>
       </header>
       <StyledList>
         <p>

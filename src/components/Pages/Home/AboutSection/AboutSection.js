@@ -10,6 +10,7 @@ import QuestionMark from 'assets/images/questionmark.svg';
 import MeImage from 'assets/images/damian.png';
 import Dotted from 'assets/images/dotted-square.svg';
 import UrlLink from 'components/General/UrlLink';
+import { useLanguage } from 'context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -317,6 +318,7 @@ const StyledAboutSection = styled.section`
 `;
 
 const AboutSection = () => {
+  const [{ language }] = useLanguage();
   const wrapper = useRef(null);
 
   useEffect(() => {
@@ -351,24 +353,44 @@ const AboutSection = () => {
       <img id='me-image' src={MeImage} alt='meImage' />
       <img id='dotted-square-image' src={Dotted} alt='dottedImage' />
       <Heading color='#8065A8'>
-        Kim jestem <br /> i co ja tu robię?
+        {language === 'polish' ? (
+          <>
+            Kim jestem <br /> i co ja tu robię?
+          </>
+        ) : (
+          <>
+            Who am I <br /> and what doing here?
+          </>
+        )}
       </Heading>
       <p id='about-paragraph-1'>
-        Jestem studentem II roku teleinformatyki na Politechnice Poznańskiej i
-        pretenduję do tego, by znaleźć swoją pierwszą pracę jako junior frontend
-        developer. Uwielbiam to robić i nie widzę nic innego w czym sprawdziłbym
-        się tak dobrze
+        {language === 'polish'
+          ? `Jestem studentem II roku teleinformatyki na Politechnice Poznańskiej i
+          pretenduję do tego, by znaleźć swoją pierwszą pracę jako junior frontend
+          developer. Uwielbiam to robić i nie widzę nic innego w czym sprawdziłbym
+          się tak dobrze`
+          : `I am a second-year student of ICT at the Poznań University of Technology and
+          I pretend to find my first job as a junior frontend
+          developer. I love doing it and can't see anything else that I would check
+          doing so well`}
       </p>
       <p id='about-paragraph-2'>
-        W swoich projektach korzystam z wielu technologi, nie ograniczam się do
-        pojedynczych rozwiązań, tylko staram się być otwarty na wiele aspektów.
-        Więcej o mnie i moich rozwiązaniach można poczytać tutaj
+        {language === 'polish'
+          ? `
+          W swoich projektach staram korzystać się z wielu technologi, nie oczekując "jedynego poprawnego" narzędzia. Bo to nie od narzędzi zależy jak kod zostanie napisany.
+          Więcej o mnie i moich rozwiązaniach można poczytać tutaj`
+          : `In my projects I try to use many technologies, not expecting "the only correct" tool. Because it is not the tools that determine how the code will be written.
+          You can read more about me and my solutions here`}
       </p>
       <SocialLinks links color='#EBEBEB' />
       <div id='redirects'>
-        <UrlLink to='/about'>O mnie</UrlLink>
+        <UrlLink to='/about'>
+          {language === 'polish' ? 'O mnie' : 'About me'}
+        </UrlLink>
         <br />
-        <UrlLink to='/contact'>Kontakt</UrlLink>
+        <UrlLink to='/contact'>
+          {language === 'polish' ? 'Kontakt' : 'Contact'}
+        </UrlLink>
       </div>
       <Rectangle1 className='animated-rectangles animated-rectangle-1' />
       <Rectangle2 className='animated-rectangles animated-rectangle-2' />

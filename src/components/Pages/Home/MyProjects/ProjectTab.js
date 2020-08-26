@@ -47,7 +47,7 @@ const StyledProjectTab = styled.article`
   }
 
   @media (max-width: 800px) {
-    width: auto;
+    width: 100vw;
   }
 `;
 

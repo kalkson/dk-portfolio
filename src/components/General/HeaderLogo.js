@@ -5,7 +5,6 @@ const StyledHeaderLogo = styled.div`
   color: ${({ theme }) => theme.purple};
   font-size: 2rem;
   text-align: center;
-  /* line-height: 20px; */
   margin-bottom: 50px;
   z-index: 1;
   display: flex;

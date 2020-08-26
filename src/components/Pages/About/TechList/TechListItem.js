@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 import CheckIcon from 'assets/images/check-icon.svg';
 import UnCheckIcon from 'assets/images/un-check-icon.svg';
+import InProgressIcon from 'assets/images/in-progress-icon.svg';
 import { ReactComponent as Arrow } from 'assets/images/arrow-right.svg';
 
 const StyledTechListItem1 = styled.li`
@@ -59,10 +60,26 @@ const StyledTechList = styled.ul`
 `;
 
 const ListItem = ({ icon, children }) => {
+  let type = null;
+
+  switch (icon) {
+    case 'check':
+      type = CheckIcon;
+      break;
+    case 'unCheck':
+      type = UnCheckIcon;
+      break;
+    case 'inProgress':
+      type = InProgressIcon;
+      break;
+    default:
+      break;
+  }
+
   return (
     <>
       <StyledTechListItem2>
-        <img src={icon === 'check' ? CheckIcon : UnCheckIcon} alt='list icon' />
+        <img src={type} alt='list icon' />
         {children}
       </StyledTechListItem2>
     </>

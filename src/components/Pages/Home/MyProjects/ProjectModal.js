@@ -5,7 +5,10 @@ import squared from 'assets/images/squared-square.svg';
 import { ReactComponent as Xclose } from 'assets/images/xclose.svg';
 import { ReactComponent as GithubIcon } from 'assets/images/github-icon.svg';
 import { ReactComponent as WebIcon } from 'assets/images/web.svg';
+import { ReactComponent as Delete } from 'assets/images/delete.svg';
 import Heading from 'components/General/Heading';
+import { connect } from 'react-redux';
+import { deleteProject } from 'store/actions/projectsActions';
 
 const StyledProjectModalContainer = styled.div`
   display: flex;
@@ -18,7 +21,7 @@ const StyledProjectModalContainer = styled.div`
   left: 0;
   top: 0;
   display: ${({ isProjectOpen }) => (isProjectOpen ? 'flex' : 'none')};
-  z-index: 12;
+  z-index: 15;
 `;
 
 const StyledProjectModal = styled.article`
@@ -41,12 +44,20 @@ const StyledProjectModal = styled.article`
     justify-content: space-between;
 
     & > nav {
-      & a {
+      & a,
+      & button {
         width: 35px;
         margin-left: 10px;
+        position: relative;
+        height: fit-content;
+        padding: 0;
 
-        & path {
-          fill: ${({ theme }) => theme.fair};
+        & svg {
+          max-height: 35px;
+
+          & path {
+            fill: ${({ theme }) => theme.fair};
+          }
         }
       }
     }
@@ -73,7 +84,6 @@ const StyledProjectModal = styled.article`
   & > #web-image {
     position: relative;
     width: 100%;
-    /* height: 200px; */
   }
 
   & > #squared-image {
@@ -120,23 +130,25 @@ const StyledProjectModal = styled.article`
 
   @media (min-width: 1200px) {
     max-width: 500px;
-    /* height: 600px; */
   }
 
   @media (min-width: 1500px) {
     max-width: 800px;
-    /* height: 800px; */
   }
 `;
 
 const ProjectModal = ({
+  id,
   isProjectOpen,
   closeProject,
+  deleteProject,
   title,
   imageUrl,
   github,
   description,
   webUrl,
+  image,
+  auth,
 }) => {
   const modalRef = useRef(null);
 
@@ -164,10 +176,23 @@ const ProjectModal = ({
         <header>
           <Heading>{title}</Heading>
           <nav>
-            <a href={webUrl}>
+            {auth.uid && (
+              <button
+                type='button'
+                onClick={() => {
+                  if (window.confirm('Are you sure?')) {
+                    deleteProject({ id, image });
+                    closeProject(!isProjectOpen);
+                  }
+                }}
+              >
+                <Delete />
+              </button>
+            )}
+            <a href={webUrl} target='blink'>
               <WebIcon />
             </a>
-            <a href={github}>
+            <a href={github} target='blink'>
               <GithubIcon />
             </a>
           </nav>
@@ -183,11 +208,18 @@ const ProjectModal = ({
 ProjectModal.propTypes = {
   isProjectOpen: propTypes.bool.isRequired,
   closeProject: propTypes.func.isRequired,
+  deleteProject: propTypes.func.isRequired,
+  auth: propTypes.oneOfType([
+    propTypes.objectOf(propTypes.string),
+    propTypes.bool,
+  ]),
   title: propTypes.string,
   description: propTypes.string,
   imageUrl: propTypes.string,
   github: propTypes.string,
   webUrl: propTypes.string,
+  id: propTypes.string,
+  image: propTypes.string,
 };
 
 ProjectModal.defaultProps = {
@@ -196,6 +228,21 @@ ProjectModal.defaultProps = {
   imageUrl: '',
   github: '',
   webUrl: '',
+  id: '',
+  image: '',
+  auth: undefined,
 };
 
-export default ProjectModal;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteProject: (project) => dispatch(deleteProject(project)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectModal);

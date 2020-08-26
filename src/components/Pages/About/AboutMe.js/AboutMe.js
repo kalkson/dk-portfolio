@@ -20,6 +20,10 @@ const StyledAboutMe = styled.section`
 
   & > p {
     margin-bottom: 100px;
+
+    & a {
+      color: purple;
+    }
   }
 
   & > div {
@@ -97,8 +101,14 @@ const AboutMe = () => {
             Chciałbym znaleźć pracę jako junior. Po części też to po to
             portfolio powstało. Znajdziesz tutaj moje projekty - te większe i
             mniejsze z dokładnym opisem do czego dany projekt służy i z jakich
-            narzędzi został zbudowany. Ponadto możesz podejrzeć kod na GitHubie
-            i sprawdzić moje umiejętności. <br />
+            narzędzi został zbudowany. Ponadto możesz podejrzeć kod (prawie)
+            każdego projektu na GitHubie i sprawdzić moje umiejętności. Zobacz
+            kod tego portfolio
+            <a href='https://github.com/kalkson/dk-portfolio' target='blink'>
+              tutaj
+            </a>
+            .
+            <br />
             <br />W swojej pracy nie ograniczam się do &quot;jedynych słusznych
             rozwiązań&quot;. Jestem otwarty na wiele dróg i szukanie najlepszego
             rozwiązania.
@@ -113,12 +123,17 @@ const AboutMe = () => {
             that for this I will need more than just sitting alone at the
             monitor screen, reading documentation, looking for solutions late at
             night on stack overflow, or watching courses. <br />
-            <br />
-            I would like to find a job as a junior. In part, this is also the
-            portfolio arose. Here you will find my projects - the larger and
+            <br />I would like to find a job as a junior. In part, this is also
+            the portfolio arose. Here you will find my projects - the larger and
             smaller ones with a detailed description of what the project is for
             and what tools are used was built. Moreover, you can preview the
-            code on GitHub and check it my skills. <br />
+            code if (almost) every project on GitHub and check it my skills.
+            Check out this portfolio code{' '}
+            <a href='https://github.com/kalkson/dk-portfolio' target='blink'>
+              here
+            </a>
+            .
+            <br />
             <br /> In my work I do not limit myself to &quot;the right
             ones.&quot; solutions. I am open to many ways and looking for the
             best solutions.

@@ -98,7 +98,9 @@ const Techs = () => {
   return (
     <StyledContainer ref={heading}>
       <Heading color='#181818'>
-        Cześć! Jestem FrontEnd Developerem a moje oczka w głowie to:
+        {language === 'polish'
+          ? 'Cześć! Jestem (przyszłym) FrontEnd Developerem a moje oczka w głowie to:'
+          : 'Hi! I am (future) FrontEnd Developer and my apples of the eyes are:'}
       </Heading>
       <StyledTechs ref={wrapper}>
         <TechCard

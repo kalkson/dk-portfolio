@@ -11,7 +11,7 @@ const StyledSocialLinks = styled.div`
   width: fit-content;
   z-index: 3;
 
-  & > span {
+  & > a {
     color: ${({ color }) => color};
     font-size: 1.8rem;
     display: flex;
@@ -31,18 +31,18 @@ const StyledSocialLinks = styled.div`
 const SocialLinks = ({ links, color }) => {
   return links ? (
     <StyledSocialLinks links={links} color={color}>
-      <span>
+      <a href='https://www.linkedin.com/in/damian-kalka/' target='blink'>
         <LinkedIn />
         LinkedIn
-      </span>
-      <span>
+      </a>
+      <a href='https://www.facebook.com/kalka762/' target='blink'>
         <Facebook />
         Facebook
-      </span>
-      <span>
+      </a>
+      <a href='https://github.com/kalkson' target='blink'>
         <GitHub />
         GitHub
-      </span>
+      </a>
     </StyledSocialLinks>
   ) : (
     <StyledSocialLinks>

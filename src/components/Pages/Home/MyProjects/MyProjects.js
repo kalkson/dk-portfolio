@@ -176,6 +176,8 @@ const MyProjects = ({ projects }) => {
             ? currentProject.polishDescription
             : currentProject.englishDescription
         }
+        id={currentProject.id}
+        image={currentProject.image}
       />
     </>
   );
@@ -194,8 +196,8 @@ export default compose(
 
 MyProjects.propTypes = {
   projects: propTypes.oneOfType([
-    propTypes.arrayOf(propTypes.array),
-    propTypes.objectOf(propTypes.array),
+    propTypes.arrayOf(propTypes.arrayOf(propTypes.array)),
+    propTypes.objectOf(propTypes.arrayOf(propTypes.array)),
   ]),
 };
 

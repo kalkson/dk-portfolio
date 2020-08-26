@@ -8,14 +8,16 @@ const StyledProjectListItem = styled.li`
   margin-bottom: 10px;
   width: 100%;
   display: flex;
+  justify-content: space-between;
   cursor: pointer;
 
-  & > img {
-    max-height: 100%;
-    position: relative;
+  & > .web-app-image {
+    height: 100%;
+    width: 200px;
+    background: transparent url(${({ img }) => img}) center / cover no-repeat;
   }
 
-  & > div {
+  & > .web-app-desc {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -36,9 +38,9 @@ const StyledProjectListItem = styled.li`
 
 const ProjectListItem = ({ title, shortDescription, imageUrl }) => {
   return (
-    <StyledProjectListItem>
-      <img src={imageUrl} alt='application' />
-      <div>
+    <StyledProjectListItem img={imageUrl}>
+      <div className='web-app-image' />
+      <div className='web-app-desc'>
         <h4>{title}</h4>
         <p>{shortDescription}</p>
       </div>

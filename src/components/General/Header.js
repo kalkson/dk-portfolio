@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { Link } from 'react-router-dom';
 import { useLanguage } from 'context/LanguageContext';
 import HeaderLogo from 'components/General/HeaderLogo';
 import { ReactComponent as PolishFlag } from 'assets/images/pl-flag.svg';
@@ -137,13 +138,15 @@ const PhoneMenuButton = styled.div`
   position: fixed;
   top: 18px;
   left: 10px;
-  z-index: 10;
+  z-index: 2;
   height: 2.5px;
   width: 25px;
   background-color: ${({ isOpen, theme }) =>
     isOpen ? 'transparent' : theme.darkk};
   transition: background-color 0.25s ease-in-out;
   transform: scale(1.3);
+  z-index: 13;
+  cursor: pointer;
 
   &:before,
   &:after {
@@ -161,7 +164,6 @@ const PhoneMenuButton = styled.div`
     bottom: 7px;
     transform: ${({ isOpen }) =>
       isOpen ? 'rotate(45deg) translateY(-2.5px)' : 'rotate(0) translateY(0)'};
-    /* width: ${({ isOpen }) => (isOpen ? '20px' : '25px')}; */
     opacity: ${({ isVisible }) => (isVisible ? '1' : '1')};
   }
 
@@ -169,7 +171,6 @@ const PhoneMenuButton = styled.div`
     top: 7px;
     transform: ${({ isOpen }) =>
       isOpen ? 'rotate(-45deg) translateY(2.5px)' : 'rotate(0) translateY(0)'};
-    /* width: ${({ isOpen }) => (isOpen ? '20px' : '25px')}; */
     opacity: ${({ isVisible }) => (isVisible ? '1' : '1')};
   }
 `;
@@ -205,10 +206,10 @@ const Header = ({ auth }) => {
       <div id='header-social-links'>
         <SocialLinks />
       </div>
-      <div>
+      <Link to='/'>
         <img id='dk-header-logo' src={logo} alt='logo' />
         <HeaderLogo />
-      </div>
+      </Link>
       <img id='dotted-square' src={dotted} alt='dotted square' />
       <img id='hash' src={hash} alt='hash' />
       <img id='oval' src={oval} alt='oval' />

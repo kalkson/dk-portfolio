@@ -6,7 +6,6 @@ import SocialLinks from 'components/General/SocialLinks';
 import { Link } from 'react-router-dom';
 import circles from 'assets/images/circles.svg';
 import oval from 'assets/images/oval.svg';
-// import { ReactComponent as Xclose } from 'assets/images/xclose.svg';
 
 const StyledPhoneMenu = styled.div`
   display: flex;
@@ -19,7 +18,7 @@ const StyledPhoneMenu = styled.div`
   padding: 60px 20px 90px;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 10;
   overflow: hidden;
   transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
   transition: transform ease-in-out 400ms;
