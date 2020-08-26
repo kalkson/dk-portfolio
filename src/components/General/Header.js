@@ -29,9 +29,6 @@ const StyledHeader = styled.header`
   justify-content: center;
   align-items: center;
 
-  & > #phone-menu-button {
-  }
-
   & > .language-buttons {
     position: absolute;
     right: 10px;
@@ -73,10 +70,11 @@ const StyledHeader = styled.header`
 
   & #dk-header-logo {
     width: fit-content;
-    margin-bottom: 40px;
     position: relative;
     display: block;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
   }
 
   & > #oval,
@@ -84,8 +82,6 @@ const StyledHeader = styled.header`
   & > #hash {
     display: none;
   }
-
-  /* tablet screen */
 
   @media (min-width: 800px) {
     height: 360px;
@@ -138,14 +134,13 @@ const PhoneMenuButton = styled.div`
   position: fixed;
   top: 18px;
   left: 10px;
-  z-index: 2;
+  z-index: 12;
   height: 2.5px;
   width: 25px;
   background-color: ${({ isOpen, theme }) =>
     isOpen ? 'transparent' : theme.darkk};
   transition: background-color 0.25s ease-in-out;
   transform: scale(1.3);
-  z-index: 13;
   cursor: pointer;
 
   &:before,

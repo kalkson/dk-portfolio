@@ -7,8 +7,6 @@ import propTypes from 'prop-types';
 import Slider from 'react-slick';
 import UrlLink from 'components/General/UrlLink';
 import { useLanguage } from 'context/LanguageContext';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import Heading from 'components/General/Heading';
 import ProjectTab from './ProjectTab';
 import ProjectModal from './ProjectModal';

@@ -26,6 +26,14 @@ const StyledAboutMe = styled.section`
     }
   }
 
+  & > img {
+    position: absolute;
+    bottom: 80px;
+    transform: scale(4) rotate(30deg);
+    right: 20%;
+    z-index: 1;
+  }
+
   & > div {
     display: flex;
     justify-content: space-between;
@@ -44,14 +52,6 @@ const StyledAboutMe = styled.section`
         }
       }
     }
-  }
-
-  & > img {
-    position: absolute;
-    bottom: 80px;
-    transform: scale(4) rotate(30deg);
-    right: 20%;
-    z-index: 1;
   }
 
   @media (max-width: 800px) {

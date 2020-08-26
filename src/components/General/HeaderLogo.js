@@ -10,18 +10,17 @@ const StyledHeaderLogo = styled.div`
   display: flex;
   flex-direction: column;
 
+  & > span:nth-child(3) {
+    font-size: 0.7rem;
+  }
+
   & > span:first-child {
     & > span {
       color: ${({ theme }) => theme.darkk};
     }
   }
 
-  & > span:nth-child(3) {
-    font-size: 0.7rem;
-  }
-
   @media (min-width: 800px) {
-    /* line-height: 50px; */
     font-size: 5.5rem;
 
     & > span:nth-child(2) {

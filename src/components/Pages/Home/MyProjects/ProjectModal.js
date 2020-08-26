@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import { deleteProject } from 'store/actions/projectsActions';
 
 const StyledProjectModalContainer = styled.div`
-  display: flex;
   height: 100vh;
   width: 100%;
   position: fixed;
@@ -38,6 +37,15 @@ const StyledProjectModal = styled.article`
   top: 0;
   transform: translateY(-100%);
   box-shadow: 0px 0px 75px 12px rgba(0, 0, 0, 0.75);
+
+  & > svg {
+    position: absolute;
+    cursor: pointer;
+    top: 10px;
+    left: 14px;
+    transform: scale(0.7);
+    margin: 0;
+  }
 
   & > header {
     display: flex;
@@ -70,15 +78,6 @@ const StyledProjectModal = styled.article`
   & > p {
     text-align: justify;
     z-index: 2;
-  }
-
-  & > svg {
-    position: absolute;
-    cursor: pointer;
-    top: 10px;
-    left: 14px;
-    transform: scale(0.7);
-    margin: 0;
   }
 
   & > #web-image {

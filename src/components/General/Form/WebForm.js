@@ -14,7 +14,6 @@ const StyledForm = styled.form`
     background-color: #484848;
     color: ${({ theme }) => theme.fair};
     outline: none;
-    border: none;
     border-radius: 8px;
     border: solid 2px ${({ theme }) => theme.purple};
   }

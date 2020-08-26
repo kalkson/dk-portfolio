@@ -38,9 +38,7 @@ const StyledProjectsWrapper = styled.article`
     list-style-type: none;
     padding: 0;
     margin: 0;
-
     display: flex;
-    margin: 0;
     width: 90%;
     flex-wrap: no-wrap;
     flex-direction: column;
