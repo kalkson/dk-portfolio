@@ -68,8 +68,16 @@ const StyledAboutSection = styled.section`
     margin-bottom: 20px;
   }
 
-  & svg path {
-    fill: ${({ theme }) => theme.fair};
+  & > div[color] {
+    @media (max-width: 800px) {
+      & > a {
+        color: ${({ theme }) => theme.fair};
+
+        & > svg > path {
+          fill: ${({ theme }) => theme.fair};
+        }
+      }
+    }
   }
 
   & > div {
@@ -79,6 +87,16 @@ const StyledAboutSection = styled.section`
   @media (max-width: 1000px) {
     & .animated-rectangles {
       display: none;
+    }
+  }
+
+  @media (max-width: 800px) {
+    #social-links > a {
+      color: ${({ theme }) => theme.fair};
+
+      & > svg > path {
+        fill: ${({ theme }) => theme.fair};
+      }
     }
   }
 
@@ -382,7 +400,7 @@ const AboutSection = () => {
           : `In my projects I try to use many technologies, not expecting "the only correct" tool. Because it is not the tools that determine how the code will be written.
           You can read more about me and my solutions here`}
       </p>
-      <SocialLinks links color='#EBEBEB' />
+      <SocialLinks links color='#181818' />
       <div id='redirects'>
         <UrlLink to='/about'>
           {language === 'polish' ? 'O mnie' : 'About me'}

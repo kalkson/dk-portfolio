@@ -18,6 +18,27 @@ const StyledProjects = styled.main`
   padding: 100px 0 200px;
   position: relative;
 
+  & > #loading-animation {
+    animation: pulse 1000ms linear forwards infinite;
+    width: 30px;
+    height: 30px;
+    background-color: ${({ theme }) => theme.dark};
+    border-radius: 15px;
+    margin: 0 auto;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.3);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   @media (min-width: 1200px) {
     & > img {
       transform: scale(5);
@@ -35,14 +56,20 @@ const StyledProjects = styled.main`
   }
 
   @media (max-width: 800px) {
-    & > img {
-      display: none;
-    }
-
     background-color: ${({ theme }) => theme.dark};
+
+    & > #loading-animation {
+      background-color: ${({ theme }) => theme.fair};
+    }
 
     & > header > h2 {
       color: ${({ theme }) => theme.fair};
+    }
+  }
+
+  @media (max-width: 1000px) {
+    & > img {
+      display: none;
     }
   }
 
@@ -70,7 +97,11 @@ const Projects = ({ projects }) => {
       <header ref={heading}>
         <Heading>Moje Projekty</Heading>
       </header>
-      <ProjectsWrapper projects={projects} />
+      {projects.length === 0 ? (
+        <div id='loading-animation'></div>
+      ) : (
+        <ProjectsWrapper projects={projects} />
+      )}
       <img src={Book} alt='book' />
     </StyledProjects>
   );

@@ -16,6 +16,12 @@ const StyledSocialLinks = styled.div`
     font-size: 1.8rem;
     display: flex;
     align-items: center;
+    transition: transform 100ms linear;
+
+    &:hover {
+      color: ${({ color }) => color};
+      transform: scale(1.1);
+    }
 
     & > svg {
       margin-right: ${({ links }) => (links ? '10px' : '0')};
@@ -46,15 +52,15 @@ const SocialLinks = ({ links, color }) => {
     </StyledSocialLinks>
   ) : (
     <StyledSocialLinks>
-      <span>
+      <a href='https://www.linkedin.com/in/damian-kalka/' target='blink'>
         <LinkedIn />
-      </span>
-      <span>
+      </a>
+      <a href='https://www.facebook.com/kalka762/' target='blink'>
         <Facebook />
-      </span>
-      <span>
+      </a>
+      <a href='https://github.com/kalkson' target='blink'>
         <GitHub />
-      </span>
+      </a>
     </StyledSocialLinks>
   );
 };
