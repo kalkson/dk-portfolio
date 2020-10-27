@@ -127,7 +127,7 @@ const MyProjects = ({ projects }) => {
   return (
     <>
       <StyledMyProjects>
-        <Heading color='#EBEBEB'>
+        <Heading color="#EBEBEB">
           {language === 'polish' ? 'Moje projekty' : 'My projects'}
         </Heading>
         <Slider {...settings}>
@@ -135,7 +135,7 @@ const MyProjects = ({ projects }) => {
             projects.map((project) => (
               <button
                 key={`${project.name}-button`}
-                type='button'
+                type="button"
                 onClick={() => {
                   setCurrentProject([]);
                   setCurrentProject(project);
@@ -157,7 +157,7 @@ const MyProjects = ({ projects }) => {
         </Slider>
         <span>- swipe -</span>
         <div>
-          <UrlLink to='/projects'>
+          <UrlLink to="/projects">
             {language === 'polish'
               ? 'Zobacz wszystkie projeckty'
               : 'See all projects'}
