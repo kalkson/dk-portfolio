@@ -13,6 +13,7 @@ const StyledRouterLink = styled(Link)`
   &:hover {
     transform: translateY(-5px);
     text-decoration: underline;
+    color: ${({ theme }) => theme.purple};
   }
 
   & img {
@@ -46,12 +47,12 @@ const UrlLink = ({ to, children, href }) => {
           window.scrollTo(0, 0);
         }}
       >
-        {children} <img src={Arrow} alt='arrow link' />
+        {children} <img src={Arrow} alt="arrow link" />
       </StyledRouterLink>
     );
   return (
     <StyledUrlLink href={href}>
-      {children} <img src={Arrow} alt='arrow link' />
+      {children} <img src={Arrow} alt="arrow link" />
     </StyledUrlLink>
   );
 };
