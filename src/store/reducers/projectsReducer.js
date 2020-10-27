@@ -1,31 +1,29 @@
-import bg from 'assets/images/bg1.png';
-
 const initialState = {
   projects: [
     {
       name: 'idoxeadnails',
-      img: bg,
+      img: null,
       shordDescription: 'Strona do wstawiania paznokci',
       description:
         'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
     },
     {
       name: 'idoxedasdnails',
-      img: bg,
+      img: null,
       shordDescription: 'Strona do wstawiania paznokci',
       description:
         'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
     },
     {
       name: 'idoxedanails',
-      img: bg,
+      img: null,
       shordDescription: 'Strona do wstawiania paznokci',
       description:
         'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',
     },
     {
       name: 'kocham idzie',
-      img: bg,
+      img: null,
       shordDescription: 'Strona do wstawiania paznokci',
       description:
         'Strona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokciStrona do wstawiania paznokci',

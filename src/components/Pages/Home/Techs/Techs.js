@@ -14,7 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const StyledContainer = styled.section`
   background-color: ${({ theme }) => theme.fair};
-  overflow: hidden;
 
   & h2 {
     text-align: center;
@@ -69,7 +68,7 @@ const Techs = () => {
     } else {
       elements.forEach((element) => {
         gsap.fromTo(
-          element.children,
+          element,
           { y: '+=100', opacity: 0 },
           {
             y: 0,

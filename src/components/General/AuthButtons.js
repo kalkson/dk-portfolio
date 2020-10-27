@@ -31,12 +31,12 @@ const StyledAuthButtons = styled.div`
 const AuthButtons = ({ signOut }) => {
   return (
     <StyledAuthButtons>
-      <button type='button'>
-        <Link to='/add'>
+      <button type="button">
+        <Link to="/add">
           <Add />
         </Link>
       </button>
-      <button type='button' onClick={() => signOut()}>
+      <button type="button" onClick={() => signOut()}>
         <SignOut />
       </button>
     </StyledAuthButtons>

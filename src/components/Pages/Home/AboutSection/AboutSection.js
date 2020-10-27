@@ -7,7 +7,7 @@ import { ReactComponent as Rectangle2 } from 'assets/images/rec-2.svg';
 import SocialLinks from 'components/General/SocialLinks';
 import Heading from 'components/General/Heading';
 import QuestionMark from 'assets/images/questionmark.svg';
-import MeImage from 'assets/images/damian.png';
+import MeImage from 'assets/images/damian.webp';
 import Dotted from 'assets/images/dotted-square.svg';
 import UrlLink from 'components/General/UrlLink';
 import { useLanguage } from 'context/LanguageContext';
@@ -354,7 +354,7 @@ const AboutSection = () => {
           ease: 'easeInOut',
           scrollTrigger: {
             trigger: element,
-            start: 'top 100%',
+            start: element.id === 'me-image' ? 'top 70%' : 'top 40%',
           },
         }
       );
@@ -363,11 +363,7 @@ const AboutSection = () => {
 
   return (
     <StyledAboutSection ref={wrapper}>
-      <img
-        id='question-mark-image'
-        src={QuestionMark}
-        alt='questionMarkImage'
-      />
+      <img id='question-mark-image' src={QuestionMark} alt='questionMarkImage' />
       <img id='me-image' src={MeImage} alt='meImage' />
       <img id='dotted-square-image' src={Dotted} alt='dottedImage' />
       <Heading color='#8065A8'>
@@ -402,13 +398,9 @@ const AboutSection = () => {
       </p>
       <SocialLinks links color='#181818' />
       <div id='redirects'>
-        <UrlLink to='/about'>
-          {language === 'polish' ? 'O mnie' : 'About me'}
-        </UrlLink>
+        <UrlLink to='/about'>{language === 'polish' ? 'O mnie' : 'About me'}</UrlLink>
         <br />
-        <UrlLink to='/contact'>
-          {language === 'polish' ? 'Kontakt' : 'Contact'}
-        </UrlLink>
+        <UrlLink to='/contact'>{language === 'polish' ? 'Kontakt' : 'Contact'}</UrlLink>
       </div>
       <Rectangle1 className='animated-rectangles animated-rectangle-1' />
       <Rectangle2 className='animated-rectangles animated-rectangle-2' />
