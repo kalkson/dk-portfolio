@@ -343,9 +343,10 @@ const AboutSection = () => {
     const elements = Array.from(wrapper.current.children);
 
     elements.forEach((element) => {
+      console.log(element);
       gsap.fromTo(
         element,
-        { y: element.id === 'me-image' ? '-=100' : '+=100', opacity: 0 },
+        { y: element.id === 'me-image' ? '-=100' : '+=100', opacity: 1 },
         {
           y: 0,
           opacity: 1,
@@ -354,19 +355,28 @@ const AboutSection = () => {
           ease: 'easeInOut',
           scrollTrigger: {
             trigger: element,
-            start: element.id === 'me-image' ? 'top 70%' : 'top 40%',
+            start:
+              element.id === 'me-image'
+                ? 'top 70%'
+                : element.id === 'redirects'
+                ? 'top 100%'
+                : 'top 40%',
           },
         }
       );
     });
-  });
+  }, []);
 
   return (
     <StyledAboutSection ref={wrapper}>
-      <img id='question-mark-image' src={QuestionMark} alt='questionMarkImage' />
-      <img id='me-image' src={MeImage} alt='meImage' />
-      <img id='dotted-square-image' src={Dotted} alt='dottedImage' />
-      <Heading color='#8065A8'>
+      <img
+        id="question-mark-image"
+        src={QuestionMark}
+        alt="questionMarkImage"
+      />
+      <img id="me-image" src={MeImage} alt="meImage" />
+      <img id="dotted-square-image" src={Dotted} alt="dottedImage" />
+      <Heading color="#8065A8">
         {language === 'polish' ? (
           <>
             Kim jestem <br /> i co ja tu robię?
@@ -377,7 +387,7 @@ const AboutSection = () => {
           </>
         )}
       </Heading>
-      <p id='about-paragraph-1'>
+      <p id="about-paragraph-1">
         {language === 'polish'
           ? `Jestem studentem II roku teleinformatyki na Politechnice Poznańskiej i
           pretenduję do tego, by znaleźć swoją pierwszą pracę jako junior frontend
@@ -388,7 +398,7 @@ const AboutSection = () => {
           developer. I love doing it and can't see anything else that I would check
           doing so well`}
       </p>
-      <p id='about-paragraph-2'>
+      <p id="about-paragraph-2">
         {language === 'polish'
           ? `
           W swoich projektach staram korzystać się z wielu technologi, nie oczekując "jedynego poprawnego" narzędzia. Bo to nie od narzędzi zależy jak kod zostanie napisany.
@@ -396,14 +406,18 @@ const AboutSection = () => {
           : `In my projects I try to use many technologies, not expecting "the only correct" tool. Because it is not the tools that determine how the code will be written.
           You can read more about me and my solutions here`}
       </p>
-      <SocialLinks links color='#181818' />
-      <div id='redirects'>
-        <UrlLink to='/about'>{language === 'polish' ? 'O mnie' : 'About me'}</UrlLink>
+      <SocialLinks links color="#181818" />
+      <div id="redirects">
+        <UrlLink to="/about">
+          {language === 'polish' ? 'O mnie' : 'About me'}
+        </UrlLink>
         <br />
-        <UrlLink to='/contact'>{language === 'polish' ? 'Kontakt' : 'Contact'}</UrlLink>
+        <UrlLink to="/contact">
+          {language === 'polish' ? 'Kontakt' : 'Contact'}
+        </UrlLink>
       </div>
-      <Rectangle1 className='animated-rectangles animated-rectangle-1' />
-      <Rectangle2 className='animated-rectangles animated-rectangle-2' />
+      <Rectangle1 className="animated-rectangles animated-rectangle-1" />
+      <Rectangle2 className="animated-rectangles animated-rectangle-2" />
     </StyledAboutSection>
   );
 };
